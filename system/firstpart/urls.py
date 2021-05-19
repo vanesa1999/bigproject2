@@ -1,17 +1,13 @@
-from django.db import models
-from django.contrib.auth.models import User
-Pozicionet= ['HR', 'Pergjegjes Departamenti', 'Punonjes Departamenti']
-Gjinia= ['Femer', 'MAshkull']
-Status= ['Aktiv', 'Joaktiv']
+from django.urls import path
+from .views import punonjes_detail_view, punonjes_delete_view, punonjes_update_view,\
+    punonjes_create_view, departament_detail_view, departament_create_view,departament_update_view
 
-class Punonjes(models.Model):
-    username= models.OneToOneField(User, null= True, on_delete=models.SET_NULL )
-    emer= models.CharField(max_length=100)
-    mbiemer= models.CharField(max_length=100)
-    data_e_fillimit= models.DateField()
-    data_e_mbarimit= models.DateField( blank=True)
-    pozicioni= models.CharField(choices=Pozicionet, max_length=100)
-    gjinia= models.CharField(choices=Gjinia, max_length=100)
-    numri_i_telefonit= models.CharField(blank=True, default='', max_length=10)
-    statusi= models.CharField(choices=Status, max_length=100)
-
+urlpatterns= [
+    path('punonjes/<int:pk>/', punonjes_detail_view , name= 'punonjes-detail'),
+    path('punonjes/<int:pk>/update', punonjes_update_view, name= 'punonjes-update'),
+    path('punonjes/<int:pk>/delete/', punonjes_delete_view, name= 'punonjes-delete'),
+    path('punonjes/create/', punonjes_create_view, name= 'punonjes-create'),
+    path('departament/<int:pk>/', departament_detail_view , name= 'departament-detail'),
+    path('departament/<int:pk>/update', departament_update_view, name='departament-update'),
+    path('departament/create/', departament_create_view, name='departament-create'),
+]
