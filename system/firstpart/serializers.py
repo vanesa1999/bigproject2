@@ -12,7 +12,7 @@ class PunonjesSerializer(serializers.ModelSerializer):
     class Meta:
         model= Punonjes
         fields= ['emer', 'mbiemer', 'data_e_fillimit', 'data_e_mbarimit','pozicioni', 'gjinia', 'numri_i_telefonit', 'statusi', 'username']
-        depth= 1
+        depth=   1
 
 
 class DepartamentSerializer(serializers.ModelSerializer):
