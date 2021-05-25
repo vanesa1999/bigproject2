@@ -11,8 +11,7 @@ class Departament(models.Model):
     )
     pergjegjesi = models.OneToOneField(Punonjes, on_delete=models.CASCADE)
     titulli= models.CharField(choices= Departamentet, max_length=100)
-    Nendepartamenti= models.CharField(Departamentet, null=True, max_length=100)
-    Mbidepartamenti= models.CharField(Departamentet, null=True, max_length=100)
+    parent_departament= models.ForeignKey('Departament', null= True,on_delete=models.CASCADE)
     def __str__(self):
         return self.titulli
 

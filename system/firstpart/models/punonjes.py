@@ -14,7 +14,7 @@ class Punonjes (models.Model):
         ('Aktiv', 'Aktiv'),
         ('Joaktiv', 'Joaktiv'),
     )
-    username= models.OneToOneField(User, null=True, on_delete=models.SET_NULL)
+    username= models.OneToOneField(User,null=True, on_delete=models.SET_NULL)
     emer= models.CharField(max_length=100)
     mbiemer= models.CharField(max_length=100)
     data_e_fillimit= models.DateField(null= True)
