@@ -8,6 +8,7 @@ class Departament(models.Model):
         ('Sekretaria','Sekretaria'),
         ('Administrata', 'Administrata'),
         ('IT', 'IT'),
+        ('HR', "HR"),
     )
     pergjegjesi = models.OneToOneField(Punonjes, on_delete=models.CASCADE)
     titulli= models.CharField(choices= Departamentet, max_length=100)

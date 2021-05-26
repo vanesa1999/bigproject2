@@ -1,12 +1,13 @@
 from django.db import models
 
-class Dite_pushimi(models.Model):
-    Pushimetzyrtare = (
-        ('25.12.2021', '25.12.2021'),
-        ('31.12.2021', '31.12.2021'),
-        ('01.06.2021', '01.06.2021'),
+class DitePushimi(models.Model):
+    Statusi = (
+        ('Aktive', 'Aktive'),
+        ('Joaktive', 'Joaktive'),
     )
-    pushimet_zyrtare= models.CharField(choices= Pushimetzyrtare, max_length=100)
-    aprovuar= models.BooleanField(default=False)
+    data = models.DateField()
+    emri_i_festes = models.CharField(max_length=200)
+    statusi = models.CharField(choices=Statusi, max_length=200)
+
     def __str__(self):
-        return f'{self.pushimet_zyrtare} : {self.aprovuar}'
+        return f'{self.emri_i_festes} : {self.data} {self.satusi}'

@@ -1,7 +1,8 @@
 from rest_framework import  serializers
 from django.contrib.auth.models import User
-from .models import Punonjes,Departament, Departament_per_punonjes,Dite_pushimi,Balanca, Lejet
-
+from .models import Punonjes,Departament, Departament_per_punonjes,DitePushimi ,Balanca, Lejet
+from rest_framework.response import Response
+from django.contrib.auth.models import Group
 
 class PunonjesSerializer(serializers.ModelSerializer):
     #username1= serializers.SerializerMethodField('get_username_from_user')
@@ -42,7 +43,7 @@ class LejetViewSerializer(serializers.ModelSerializer):
         fields= '__all__'
 
 
-class LejetViewSerializerA(serializers.ModelSerializer):
+class LejetViewHrSerializer(serializers.ModelSerializer):
     class Meta:
         model= Lejet
         fields= '__all__'
@@ -50,40 +51,16 @@ class LejetViewSerializerA(serializers.ModelSerializer):
                         'lloji_i_lejes': {'read_only': True},
                         'fillimi': {'read_only': True},
                         'mbarimi': {'read_only': True},
-                        'arsyetimi': {'read_only': True},
                         'punonjes': {'read_only': True},
                         'id': {'read_only': True},}
 
+
 class UserSerializer(serializers.ModelSerializer):
-    punonjes= PunonjesSerializer(many= True)
-    password2 = serializers.CharField(style= {'input_type': 'password'}, write_only=True)
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password', 'password2', 'punonjes']
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
-    def save(self):
-        user = User(
-            email= self.validated_data['email'],
-            username= self.validated_data['username'],
+        model= User
+        fields= ['username', 'email', 'password', 'id']
 
-        )
-        password= self.validated_data['password']
-        password2= self.validated_data['password2']
-        if password != password2:
-            raise serializers.ValidationError({'password': 'Passwords must match'})
-        user.set_password(password)
-        user.save()
-
-        return user
-    def create (self):
-        punonjes_data = self.validated_data.pop('punonjes')
-        validated_data= self.validated_data
-        user= User.objects.create(**validated_data)
-        Punonjes.objects.create(username=user, **punonjes_data)
-        return user
-
-
-
-
+class DitePushimiSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= DitePushimi
+        fields= '__all__'

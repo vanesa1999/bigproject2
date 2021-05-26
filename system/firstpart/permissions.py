@@ -8,10 +8,13 @@ class IsHR(permissions.BasePermission):
         print(punonjes.username)
         return punonjes.pozicioni== "HR"
 
-
 class IsOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return obj.username == request.user
+
+class IsOwnerDepartament(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj.punonjes.username == request.user
 
 class IsOwnerLeje(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):

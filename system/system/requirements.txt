@@ -1,0 +1,6 @@
+1-from the terminal:
+pip install django
+pip install djangorestframework
+
+2- add to settings.py
+'rest_framework' in INSTALLED_APPS = []
